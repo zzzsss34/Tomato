@@ -1,0 +1,45 @@
+# room.py
+class Room:
+    """Class to represent a hotel room."""
+    
+    def __init__(self, room_number, room_type, amenities, price_per_night, availability_status=True):
+        self.room_number = room_number
+        self.room_type = room_type
+        self.amenities = amenities
+        self.price_per_night = price_per_night
+        self.availability_status = availability_status
+        self.bookings = []
+    
+    def get_room_number(self):
+        """Get the room number."""
+        return self.room_number
+    
+    def get_room_type(self):
+        """Get the type of the room."""
+        return self.room_type
+    
+    def get_price_per_night(self):
+        """Get the price per night for the room."""
+        return self.price_per_night
+    
+    def is_available(self):
+        """Check if the room is available."""
+        return self.availability_status
+    
+    def set_availability_status(self, status):
+        """Set the availability status of the room."""
+        self.availability_status = status
+    
+    def is_available_for_dates(self, check_in, check_out):
+        """Check if the room is available for the given dates."""
+        for booking in self.bookings:
+            if not (check_out <= booking.get_check_in() or check_in >= booking.get_check_out()):
+                return False
+        return True
+    
+    def add_booking(self, booking):
+        """Add a booking to the room."""
+        self.bookings.append(booking)
+    
+    def __str__(self):
+        return f"Room {self.room_number}: {self.room_type}, Price: {self.price_per_night}, Available: {self.availability_status}"
