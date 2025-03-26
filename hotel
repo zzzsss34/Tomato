@@ -1,0 +1,36 @@
+# hotel.py
+from room import Room
+from guest import Guest
+from booking import Booking
+
+class Hotel:
+    """Class to manage hotel rooms, guests, and reservations."""
+    
+    def __init__(self, name, address, contact_info):
+        self.name = name
+        self.address = address
+        self.contact_info = contact_info
+        self.rooms = []  # List to store available rooms
+        self.guests = []  # List to store guests
+    
+    def add_room(self, room):
+        """Add a room to the hotel."""
+        self.rooms.append(room)
+    
+    def remove_room(self, room_number):
+        """Remove a room from the hotel."""
+        self.rooms = [room for room in self.rooms if room.get_room_number() != room_number]
+    
+    def get_available_rooms(self, check_in, check_out, room_type=None):
+        """Get all available rooms for a given date range and optional room type."""
+        available_rooms = [room for room in self.rooms if room.is_available_for_dates(check_in, check_out)]
+        if room_type:
+            available_rooms = [room for room in available_rooms if room.get_room_type() == room_type]
+        return available_rooms
+    
+    def add_guest(self, guest):
+        """Add a guest to the hotel system."""
+        self.guests.append(guest)
+    
+    def __str__(self):
+        return f"Hotel {self.name}, Address: {self.address}, Contact: {self.contact_info}"
