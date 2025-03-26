@@ -1,0 +1,11 @@
+# payment.py
+class Payment:
+    """Class to handle payment processing."""
+    
+    def process_payment(self, payment_method, amount):
+        """Simulate payment processing."""
+        if payment_method == 'credit_card':
+            return f"Paid {amount} USD using credit card."
+        elif payment_method == 'mobile_wallet':
+            return f"Paid {amount} USD using mobile wallet."
+        return "Payment method not supported"
