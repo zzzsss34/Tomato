@@ -1,0 +1,42 @@
+# test.py
+from datetime import datetime
+from hotel import Hotel
+from room import Room
+from guest import Guest
+from booking import Booking
+from invoice import Invoice
+from payment import Payment
+
+def test_guest_account_creation():
+    """Test guest account creation."""
+    guest = Guest("G001", "John Doe", "johndoe@example.com", "123-456-7890", "123 Elm St")
+    assert guest.get_name() == "John Doe"
+    assert guest.get_email() == "johndoe@example.com"
+    assert guest.get_contact_number() == "123-456-7890"
+
+def test_room_reservation():
+    """Test room reservation."""
+    hotel = Hotel("Royal Stay Hotel", "123 Royal St", "555-1234")
+    room = Room("R101", "single", ["Wi-Fi", "TV"], 100)
+    hotel.add_room(room)
+    
+    guest = Guest("G001", "John Doe", "johndoe@example.com", "123-456-7890", "123 Elm St")
+    hotel.add_guest(guest)
+    
+    check_in = datetime(2025, 3, 28)
+    check_out = datetime(2025, 3, 30)
+    available_rooms = hotel.get_available_rooms(check_in, check_out)
+    booking = Booking("B001", check_in, check_out, available_rooms[0], guest)
+    assert booking.calculate_total_amount() == 200
+    
+    # Payment
+    payment = Payment()
+    assert payment.process_payment('credit_card', 200) == "Paid 200 USD using credit card"
+    
+    invoice = Invoice("I001", booking)
+    assert invoice.get_total_amount() == 200
+
+test_guest_account_creation()
+test_room_reservation()
+
+print("All tests passed!")
