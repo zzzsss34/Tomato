@@ -1,0 +1,53 @@
+# guest.py
+class Guest:
+    """Class to represent a hotel guest."""
+    
+    def __init__(self, guest_id, name, email, contact_number, address, loyalty_points=0):
+        self.guest_id = guest_id
+        self.name = name
+        self.email = email
+        self.contact_number = contact_number
+        self.address = address
+        self.loyalty_points = loyalty_points
+        self.reservation_history = []
+    
+    def get_guest_id(self):
+        """Get the guest ID."""
+        return self.guest_id
+    
+    def get_name(self):
+        """Get the guest name."""
+        return self.name
+    
+    def get_email(self):
+        """Get the guest email."""
+        return self.email
+    
+    def get_contact_number(self):
+        """Get the guest contact number."""
+        return self.contact_number
+    
+    def update_profile(self, name, email, contact_number):
+        """Update guest's profile details."""
+        self.name = name
+        self.email = email
+        self.contact_number = contact_number
+    
+    def get_loyalty_points(self):
+        """Get the guest's loyalty points."""
+        return self.loyalty_points
+    
+    def add_loyalty_points(self, points):
+        """Add loyalty points to the guest's account."""
+        self.loyalty_points += points
+    
+    def get_reservation_history(self):
+        """Get the guest's reservation history."""
+        return self.reservation_history
+    
+    def add_reservation(self, booking):
+        """Add a reservation to the guest's history."""
+        self.reservation_history.append(booking)
+    
+    def __str__(self):
+        return f"Guest: {self.name}, Email: {self.email}, Loyalty Points: {self.loyalty_points}"
