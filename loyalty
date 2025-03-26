@@ -1,0 +1,23 @@
+# loyalty.py
+class Loyalty:
+    """Class to manage loyalty rewards program."""
+    
+    def __init__(self):
+        self.loyalty_program = {}
+    
+    def add_loyalty_points(self, guest, points):
+        """Add loyalty points to a guest's account."""
+        if guest not in self.loyalty_program:
+            self.loyalty_program[guest] = 0
+        self.loyalty_program[guest] += points
+    
+    def get_loyalty_points(self, guest):
+        """Get loyalty points for a guest."""
+        return self.loyalty_program.get(guest, 0)
+    
+    def redeem_loyalty_points(self, guest, points):
+        """Redeem loyalty points for discounts or rewards."""
+        if self.loyalty_program.get(guest, 0) >= points:
+            self.loyalty_program[guest] -= points
+            return True
+        return False
