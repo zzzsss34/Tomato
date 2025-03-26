@@ -1,0 +1,23 @@
+# invoice.py
+class Invoice:
+    """Class to represent an invoice generated for a booking."""
+    
+    def __init__(self, invoice_id, booking, payment_status="PENDING"):
+        self.invoice_id = invoice_id
+        self.booking = booking
+        self.payment_status = payment_status
+    
+    def get_invoice_id(self):
+        """Get the invoice ID."""
+        return self.invoice_id
+    
+    def get_total_amount(self):
+        """Get the total amount of the invoice."""
+        return self.booking.calculate_total_amount()
+    
+    def set_payment_status(self, status):
+        """Set the payment status of the invoice."""
+        self.payment_status = status
+    
+    def __str__(self):
+        return f"Invoice ID: {self.invoice_id}, Status: {self.payment_status}, Total: {self.get_total_amount()} USD"
